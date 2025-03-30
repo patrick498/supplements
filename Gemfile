@@ -76,3 +76,4 @@ end
 
 # Custom Added
 gem 'ostruct'
+gem 'pundit'
