@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_30_065015) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_30_070148) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,19 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_30_065015) do
     t.string "with_food"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_supplements", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "supplement_id", null: false
+    t.integer "dose"
+    t.string "dose_unit"
+    t.integer "frequency_count"
+    t.string "frequency_period"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["supplement_id"], name: "index_user_supplements_on_supplement_id"
+    t.index ["user_id"], name: "index_user_supplements_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -33,4 +46,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_30_065015) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "user_supplements", "supplements"
+  add_foreign_key "user_supplements", "users"
 end
