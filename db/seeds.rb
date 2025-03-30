@@ -9,7 +9,7 @@
 #   end
 
 # Clear existing data (optional)
-UserSupplement.destroy_all
+Intake.destroy_all
 Supplement.destroy_all
 User.destroy_all
 
@@ -30,7 +30,7 @@ user = User.create!(
 puts "Created test user ✅"
 
 # Assign supplements to the user
-UserSupplement.create!(
+Intake.create!(
   user: user,
   supplement: vitamin_d,
   dose: 1000,
@@ -39,7 +39,7 @@ UserSupplement.create!(
   period: "day"
 )
 
-UserSupplement.create!(
+Intake.create!(
   user: user,
   supplement: magnesium,
   dose: 400,
@@ -48,7 +48,7 @@ UserSupplement.create!(
   period: "day"
 )
 
-UserSupplement.create!(
+Intake.create!(
   user: user,
   supplement: tryptophan,
   dose: 500,

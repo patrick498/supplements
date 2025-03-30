@@ -1,6 +1,6 @@
 require "test_helper"
 
-class UserSupplementTest < ActiveSupport::TestCase
+class IntakeTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

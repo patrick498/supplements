@@ -10,18 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_30_071844) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_30_073726) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "supplements", force: :cascade do |t|
-    t.string "name"
-    t.string "with_food"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "user_supplements", force: :cascade do |t|
+  create_table "intakes", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "supplement_id", null: false
     t.integer "dose"
@@ -30,8 +23,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_30_071844) do
     t.string "period"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["supplement_id"], name: "index_user_supplements_on_supplement_id"
-    t.index ["user_id"], name: "index_user_supplements_on_user_id"
+    t.index ["supplement_id"], name: "index_intakes_on_supplement_id"
+    t.index ["user_id"], name: "index_intakes_on_user_id"
+  end
+
+  create_table "supplements", force: :cascade do |t|
+    t.string "name"
+    t.string "with_food"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -46,6 +46,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_30_071844) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "user_supplements", "supplements"
-  add_foreign_key "user_supplements", "users"
+  add_foreign_key "intakes", "supplements"
+  add_foreign_key "intakes", "users"
 end
