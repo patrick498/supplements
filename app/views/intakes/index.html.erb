@@ -5,7 +5,8 @@
       <% @intakes.each do |intake| %>
         <div class='intake_row text-md'>
           <div><%= intake.supplement.name %></div>
-          <div><%= "#{intake.dose * intake.times_per_period} #{intake.dose_unit} / #{intake.period}" %></div>
+          <div><%= "#{intake.dose} #{intake.dose_unit}" %></div>
+          <div><%= intake.time_of_day %></div>
         </div>
       <% end %>
     <% end %>

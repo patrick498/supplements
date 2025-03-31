@@ -35,28 +35,32 @@ Intake.create!([
     supplement: vitamin_d,
     dose: 1000,
     dose_unit: "IU",
-    time_of_day: "with breakfast"
+    time_of_day: "with breakfast",
+    empty_stomach: false
   },
   {
     user: user,
     supplement: magnesium,
     dose: 200,
     dose_unit: "mg",
-    time_of_day: "with dinner"
+    time_of_day: "with dinner",
+    empty_stomach: false
   },
   {
     user: user,
     supplement: tryptophan,
     dose: 500,
     dose_unit: "mg",
-    time_of_day: "before bed"
+    time_of_day: "before bed",
+    empty_stomach: true
   },
   {
     user: user,
     supplement: ashwagandha,
     dose: 600,
     dose_unit: "mg",
-    time_of_day: "between lunch and dinner (empty stomach)"
+    time_of_day: "between lunch and dinner",
+    empty_stomach: true
   }
 ])
 
