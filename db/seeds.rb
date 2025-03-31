@@ -13,14 +13,6 @@ Intake.destroy_all
 Supplement.destroy_all
 User.destroy_all
 
-# Create supplements
-vitamin_d = Supplement.create!(name: "Vitamin D3", with_food: "with")
-magnesium = Supplement.create!(name: "Magnesium Glycinate", with_food: "with")
-tryptophan = Supplement.create!(name: "L-Tryptophan", with_food: "without")
-ashwagandha = Supplement.create!(name: "Ashwagandha", with_food: "either")
-
-puts "Created supplements ✅"
-
 # Create a user
 user = User.create!(
   email: "test@a.com",
@@ -29,32 +21,43 @@ user = User.create!(
 
 puts "Created test user ✅"
 
-# Assign supplements to the user
-Intake.create!(
-  user: user,
-  supplement: vitamin_d,
-  dose: 1000,
-  dose_unit: "IU",
-  times_per_period: 1,
-  period: "day"
-)
+# Create supplements
+vitamin_d = Supplement.create!(name: "Vitamin D3", with_food: "with")
+magnesium = Supplement.create!(name: "Magnesium Glycinate", with_food: "with")
+tryptophan = Supplement.create!(name: "L-Tryptophan", with_food: "without")
+ashwagandha = Supplement.create!(name: "Ashwagandha", with_food: "either")
 
-Intake.create!(
-  user: user,
-  supplement: magnesium,
-  dose: 400,
-  dose_unit: "mg",
-  times_per_period: 1,
-  period: "day"
-)
+puts "Created supplements ✅"
 
-Intake.create!(
-  user: user,
-  supplement: tryptophan,
-  dose: 500,
-  dose_unit: "mg",
-  times_per_period: 1,
-  period: "day"
-)
+Intake.create!([
+  {
+    user: user,
+    supplement: vitamin_d,
+    dose: 1000,
+    dose_unit: "IU",
+    time_of_day: "with breakfast"
+  },
+  {
+    user: user,
+    supplement: magnesium,
+    dose: 200,
+    dose_unit: "mg",
+    time_of_day: "with dinner"
+  },
+  {
+    user: user,
+    supplement: tryptophan,
+    dose: 500,
+    dose_unit: "mg",
+    time_of_day: "before bed"
+  },
+  {
+    user: user,
+    supplement: ashwagandha,
+    dose: 600,
+    dose_unit: "mg",
+    time_of_day: "between lunch and dinner (empty stomach)"
+  }
+])
 
-puts "Assigned supplements to test user ✅"
+puts "Created intakes ✅"
