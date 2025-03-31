@@ -1,2 +1,13 @@
-<h1>Intakes#index</h1>
-<p>Find me in app/views/intakes/index.html.erb</p>
+<div class='container'>
+  <h1>Your supplements</h1>
+  <% if @intakes.present? %>
+    <div class='intake_grid'>
+      <% @intakes.each do |intake| %>
+        <div class='intake_row text-md'>
+          <div><%= intake.supplement.name %></div>
+          <div><%= "#{intake.dose * intake.times_per_period} #{intake.dose_unit} / #{intake.period}" %></div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

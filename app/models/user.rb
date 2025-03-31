@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-has_many :intakes
-has_many :supplements, through: :intakes
+  has_many :intakes
+  has_many :supplements, through: :intakes
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
