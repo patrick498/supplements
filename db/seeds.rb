@@ -8,7 +8,7 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-# Clear existing data (optional)
+# Clear existing data
 Intake.destroy_all
 Supplement.destroy_all
 User.destroy_all
@@ -29,13 +29,14 @@ ashwagandha = Supplement.create!(name: "Ashwagandha", with_food: "either")
 
 puts "Created supplements ✅"
 
+# Create intakes
 Intake.create!([
   {
     user: user,
     supplement: vitamin_d,
     dose: 1000,
     dose_unit: "IU",
-    time_of_day: "with breakfast",
+    time_of_day: "with_breakfast",
     empty_stomach: false
   },
   {
@@ -43,7 +44,7 @@ Intake.create!([
     supplement: magnesium,
     dose: 200,
     dose_unit: "mg",
-    time_of_day: "with dinner",
+    time_of_day: "with_dinner",
     empty_stomach: false
   },
   {
@@ -51,7 +52,7 @@ Intake.create!([
     supplement: tryptophan,
     dose: 500,
     dose_unit: "mg",
-    time_of_day: "before bed",
+    time_of_day: "before_bed",
     empty_stomach: true
   },
   {
@@ -59,7 +60,7 @@ Intake.create!([
     supplement: ashwagandha,
     dose: 600,
     dose_unit: "mg",
-    time_of_day: "between lunch and dinner",
+    time_of_day: "afternoon",
     empty_stomach: true
   }
 ])

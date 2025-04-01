@@ -2,11 +2,20 @@
   <h1>Your supplements</h1>
   <% if @intakes.present? %>
     <div class='intake_grid'>
+      <div class='intake_row text-md fw-bold'>
+        <div>
+          Supplement name
+          <i class="bi bi-chevron-up"></i>
+          <i class="bi bi-chevron-down"></i>
+        </div>
+        <div>Dose</div>
+        <div>Time</div>
+      </div>
       <% @intakes.each do |intake| %>
         <div class='intake_row text-md'>
           <div><%= intake.supplement.name %></div>
           <div><%= "#{intake.dose} #{intake.dose_unit}" %></div>
-          <div><%= intake.time_of_day %></div>
+          <div><%= intake.display_time_of_day %></div>
         </div>
       <% end %>
     <% end %>
