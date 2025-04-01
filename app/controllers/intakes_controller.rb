@@ -1,10 +1,4 @@
 class IntakesController < ApplicationController
-  include Pundit
-  # Rescue from unauthorized access
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
-  before_action :authenticate_user!
-
   def index
     @intakes = policy_scope(Intake).sorted_by('time_of_day', 'asc')
   end
