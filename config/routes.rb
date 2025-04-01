@@ -1,5 +1,19 @@
 Rails.application.routes.draw do
-  devise_for :users
+  # config/routes.rb
+  namespace :api do
+    namespace :v1 do
+      devise_for :users,
+        path: '',
+        path_names: {
+          sign_in: 'login',
+          sign_out: 'logout'
+        },
+        controllers: {
+          sessions: 'api/v1/sessions'
+        }
+    end
+  end
+
   root to: "intakes#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

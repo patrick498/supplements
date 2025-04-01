@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+#  This tells Devise to load the JWT extension
+require "devise/jwt"
+
 # Assuming you have not yet modified this file, each configuration option below
 # is set to its default value. Note that some are commented out while others
 # are not: uncommented lines are intended to protect your configuration from
@@ -19,6 +22,20 @@ Devise.setup do |config|
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
+
+  # Configure Devise to use JWT
+  config.jwt do |jwt|
+    jwt.secret = Rails.application.credentials.devise_jwt_secret_key || ENV['DEVISE_JWT_SECRET_KEY']
+    jwt.dispatch_requests = [
+      ['POST', %r{^/login$}],
+      ['POST', %r{^/api/v1/login$}]
+    ]
+    jwt.revocation_requests = [
+      ['DELETE', %r{^/logout$}],
+      ['DELETE', %r{^/api/v1/logout$}]
+    ]
+    jwt.expiration_time = 1.day.to_i
+  end
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
