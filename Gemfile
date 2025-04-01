@@ -77,3 +77,4 @@ end
 # Custom Added
 gem "ostruct"
 gem "pundit"
+gem "rack-cors" # for React front-end
