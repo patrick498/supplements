@@ -23,20 +23,6 @@ Devise.setup do |config|
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
 
-  # Configure Devise to use JWT
-  config.jwt do |jwt|
-    jwt.secret = Rails.application.credentials.devise_jwt_secret_key || ENV['DEVISE_JWT_SECRET_KEY']
-    jwt.dispatch_requests = [
-      ['POST', %r{^/login$}],
-      ['POST', %r{^/api/v1/login$}]
-    ]
-    jwt.revocation_requests = [
-      ['DELETE', %r{^/logout$}],
-      ['DELETE', %r{^/api/v1/logout$}]
-    ]
-    jwt.expiration_time = 1.day.to_i
-  end
-
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
@@ -327,4 +313,22 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+
+  # Configure Devise to use JWT
+
+  config.jwt do |jwt|
+    jwt.secret = Rails.application.credentials.devise_jwt_secret_key || ENV['DEVISE_JWT_SECRET_KEY']
+    jwt.dispatch_requests = [
+      ['POST', %r{^/api/v1/login$}]
+    ]
+    jwt.revocation_requests = [
+      ['DELETE', %r{^/api/v1/logout$}]
+    ]
+    jwt.expiration_time = 1.day.to_i
+  end
+
+  # ✅ THIS IS THE MAGIC LINE
+  config.warden do |manager|
+    manager.default_strategies(scope: :api_v1_user).unshift :jwt
+  end
 end

@@ -1,4 +1,5 @@
 require_relative "boot"
+require_relative "../app/middleware/request_logger"
 
 require "rails/all"
 
@@ -8,6 +9,10 @@ Bundler.require(*Rails.groups)
 
 module SupplementsApi
   class Application < Rails::Application
+    config.middleware.insert_before 0, RequestLogger
+    config.middleware.use Warden::JWTAuth::Middleware
+
+
     config.api_only = true
     config.action_controller.raise_on_missing_callback_actions = false if Rails.version >= "7.1.0"
     config.generators do |generate|

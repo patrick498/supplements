@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      root to: proc { [200, {}, ['{"status":"API running"}']] }
       devise_for :users,
         path: '',
         path_names: {
@@ -10,8 +9,10 @@ Rails.application.routes.draw do
         },
         controllers: {
           sessions: 'api/v1/sessions'
-        }
-      resources :intakes, only: [:index, :create, :destroy, :update, :show]
+        },
+        class_name: 'User'
+      resources :intakes, only: [:index]
+      root to: proc { [200, {}, ['{"status":"API running"}']] }
     end
   end
 

@@ -9,7 +9,7 @@ module Api
 
         if user&.valid_password?(params[:user][:password])
           # Manually encode the token
-          token = Warden::JWTAuth::UserEncoder.new.call(user, :user, nil).first
+          token = Warden::JWTAuth::UserEncoder.new.call(user, :api_v1_user, nil).first
 
           render json: {
             message: "Logged in successfully (manual encode)",
